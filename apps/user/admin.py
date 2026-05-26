@@ -11,4 +11,13 @@ class UserAdmin(DjangoUserAdmin):
          {"fields": ["phone_number", "address", "city", "zip_code", "country"]}),) + (
                     ("Status", {"fields": ["deleted"]}),)
 
-
+    add_fieldsets = DjangoUserAdmin.add_fieldsets + (
+        (("Contact & Address"), {
+            "classes": ("wide",),
+            "fields": ["phone_number", "address", "city", "zip_code", "country"],
+        }),
+        (("Status"), {
+            "classes": ("wide",),
+            "fields": ["deleted"],
+        }),
+    )
