@@ -1,10 +1,7 @@
 FROM python:3.12
 LABEL authors="enrico"
 
-RUN apt-get update && \
-    apt-get install -y binutils \
-    gettext \
-    postgresql-client
+RUN apt-get update && apt-get install -y binutils gettext postgresql-client
 
 RUN mkdir -p /webapp
 WORKDIR /webapp/
