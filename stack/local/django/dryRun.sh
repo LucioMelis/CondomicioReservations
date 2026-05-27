@@ -1,3 +1,5 @@
+#!/bin/bash
+
 source stack/local/local.env
 
 echo "Appling migrations ..."

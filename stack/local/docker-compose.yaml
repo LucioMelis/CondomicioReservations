@@ -43,5 +43,5 @@ services:
     depends_on:
       - ${DB_SERVICE}
     volumes:
-      - ./:/webapp
+      - ./:/webapp:z
     command: tail -f /dev/null
