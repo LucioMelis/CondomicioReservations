@@ -1,0 +1,47 @@
+version: '3.5'
+
+networks:
+  default:
+      name: ${NETWORK_NAME}
+
+volumes:
+  db:
+    driver: local
+
+services:
+  postgres.condomicio:
+    container_name: ${DB_SERVICE}
+    hostname: ${DB_SERVICE}
+    labels:
+      NAME: ${DB_SERVICE}
+    restart: unless-stopped
+    image: ${DB_SERVICE}:latest
+    build:
+      context: ${DB_CONTEXT}
+      dockerfile: ${DB_DOCKERFILE}
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    ports:
+      - ${DB_PORT}
+    volumes:
+      - db:${DB_DATA_ROOT}
+
+  django.condomicio:
+    container_name: ${DJANGO_SERVICE}
+    hostname: ${DJANGO_SERVICE}
+    labels:
+      NAME: ${DJANGO_SERVICE}
+    restart: unless-stopped
+    image: ${DJANGO_SERVICE}:${MY_ENV}
+    build:
+      context: ${DJANGO_CONTEXT}
+      dockerfile: ${DJANGO_DOCKERFILE}
+    ports:
+      - ${DJANGO_PORT}
+    depends_on:
+      - ${DB_SERVICE}
+    volumes:
+      - ./:/webapp
+    command: tail -f /dev/null
