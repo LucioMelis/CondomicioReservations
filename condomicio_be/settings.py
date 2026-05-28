@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-pdp4(k2o_g6tsu7u()qs3d0733yg%6d1+_qkwz@k7mbl67o2s3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 ####################################################
 # Custom User model
