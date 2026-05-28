@@ -18,7 +18,7 @@ class CredentialsView(APIView):
 
         user = authenticate(username=username, password=password)
 
-        print(f"DEBUG - user: {user}")
+        print(f"============================== DEBUG - user: {user}")
 
         if not user:
             return Response(

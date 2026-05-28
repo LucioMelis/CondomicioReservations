@@ -1,0 +1,20 @@
+[
+    {
+        "model": "oauth2_provider.application",
+        "pk": 1,
+        "fields": {
+            "client_id": "cA3DfrhTlvSZ2LMcyBx8aOU0HhwuwjETKEVweU0b",
+            "user": null,
+            "redirect_uris": "",
+            "post_logout_redirect_uris": "",
+            "client_type": "public",
+            "authorization_grant_type": "password",
+            "client_secret": "pbkdf2_sha256$600000$ePOxmgQAeJ9PJHMDTiAcEF$2MnWyRNvB1RRUG5Skq0hi9LKAKRv2d4CRBG5oWFi7Cg=",
+            "name": "default",
+            "skip_authorization": false,
+            "created": "2023-06-21T07:38:22.563Z",
+            "updated": "2023-06-21T07:38:22.563Z",
+            "algorithm": ""
+        }
+    }
+]

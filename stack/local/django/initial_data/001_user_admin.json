@@ -1,0 +1,46 @@
+[
+  {
+    "model": "user.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$o2Q0o5T4nisc$d3oSEtkW4NsOgUiS5+E3tuFrrLn+/pPNjT81P1mB1jg=",
+      "last_login": "2020-04-07T10:42:20.507Z",
+      "is_superuser": true,
+      "username": "super-admin",
+      "first_name": "Super Admin Django",
+      "last_name": "",
+      "email": "condomiciosuperadmin@yopmail.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2020-03-17T11:38:28.472Z",
+      "groups": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "user.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$1200000$OZWNu6NIXWOqufDujo4Kn8$UWV3Yg46TJqlcB53JOi5iffa998UJwK6qh8JDw0hL60=",
+      "last_login": "2020-04-07T10:42:20.507Z",
+      "is_superuser": false,
+      "username": "condomicio.admin@yopmail.com",
+      "first_name": "Condomicio Admin",
+      "last_name": "",
+      "email": "condomicio.admin@yopmail.com",
+      "phone_number": "3383333398",
+      "address": "Via Roma 1",
+      "city": "Cagliari",
+      "zip_code": "09127",
+      "country": "Italy",
+      "deleted": false,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-03-17T11:38:28.472Z",
+      "groups": [
+        2
+      ]
+    }
+  }
+]
