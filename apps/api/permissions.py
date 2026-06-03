@@ -32,7 +32,6 @@ class ApiReadAllowAnyCreateAdminPermission(ApiIsAuthenticatedPermission):
         else:
             return permission and user.groups.filter(name='Admin').exists()
 
-
 class ApiReadAllowAnyCreateCustomerPermission(ApiIsAuthenticatedPermission):
     def has_permission(self, request, view):
         permission = super(ApiReadAllowAnyCreateCustomerPermission, self).has_permission(request, view)
