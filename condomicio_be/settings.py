@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 ]
 
 REST_FRAMEWORK = {
+    "EXCEPTION_HANDLER": "apps.api.exceptions.custom_exception_handler",
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
     ],
