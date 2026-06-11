@@ -67,9 +67,9 @@ def custom_exception_handler(exc, context):
             "message": str(exc) if settings.DEBUG else "Internal server error",
             "api_error": exc.__class__.__name__,
             "data": None,
-            "http_status_code": 500,
+            "http_status_code": status.HTTP_500_INTERNAL_SERVER_ERROR,
         },
-        status=500,
+        status=status.HTTP_500_INTERNAL_SERVER_ERROR,
     )
 # PRODUCTION best practice
 # str(exc) if settings.DEBUG else "Internal server error"
