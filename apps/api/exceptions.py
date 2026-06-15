@@ -26,6 +26,22 @@ class APIValidationException(APICustomException):
     def __init__(self, message, api_error=400, data=None, **kwargs):
         super(APIValidationException, self).__init__(message, api_error, data, status.HTTP_400_BAD_REQUEST, **kwargs)
 
+def _get_response(exc, response=None):
+
+   #gestire status code
+   #gestire exc message
+
+    return Response(
+        {
+            "message": str(exc) if str(exc) else "Internal server error",
+            "api_error": getattr(exc, "api_error", exc.__class__.__name__),
+            "data": response.data if response else exc.data,
+            "http_status_code": response.status_code if response else exc.http_status_code,
+        },
+        status=response.status_code if response else exc.http_status_code,
+    )
+
+
 def custom_exception_handler(exc, context):
 
     # Eccezioni rest_framework 
@@ -35,41 +51,40 @@ def custom_exception_handler(exc, context):
     # ECCEZIONI CUSTOM
     # =========================
     if isinstance(exc, APIBaseException):
-        return Response(
-            {
-                "message": exc.message,
-                "api_error": getattr(exc, "api_error", exc.__class__.__name__),
-                "data": exc.data,
-                "http_status_code": exc.http_status_code,
-            },
-            status=exc.http_status_code,
-        )
+        return _get_response(exc)
 
     # =========================
     # ERRORI DRF
     # =========================
     if response is not None:
-        return Response(
-            {
-                "message": "Internal DRF server error",
-                "api_error": exc.__class__.__name__,
-                "data": response.data,
-                "http_status_code": response.status_code,
-            },
-            status=response.status_code,
-        )
+        print("-------------------------sono qui--------------------------")
+        return _get_response(exc, response)
+        # return Response(
+        #     {
+        #         "message": "Internal DRF server error",
+        #         "api_error": exc.__class__.__name__,
+        #         "data": response.data,
+        #         "http_status_code": response.status_code,
+        #     },
+        #     status=response.status_code,
+        # )
 
     # =========================
     # ERRORI DJANGO / PYTHON GENERICI
     # =========================
-    return Response(
-        {
-            "message": str(exc) if settings.DEBUG else "Internal server error",
-            "api_error": exc.__class__.__name__,
-            "data": None,
-            "http_status_code": status.HTTP_500_INTERNAL_SERVER_ERROR,
-        },
-        status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-    )
+
+    return _get_response(exc)
+    #
+    #
+    # return Response(
+    #
+    # {
+    #         "message": str(exc) if settings.DEBUG else "Internal server error",
+    #         "api_error": exc.__class__.__name__,
+    #         "data": None,
+    #         "http_status_code": status.HTTP_500_INTERNAL_SERVER_ERROR,
+    #     },
+    #     status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+    # )
 # PRODUCTION best practice
 # str(exc) if settings.DEBUG else "Internal server error"

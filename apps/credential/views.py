@@ -8,6 +8,10 @@ from datetime import timedelta
 from oauth2_provider.settings import oauth2_settings
 from django.utils import timezone
 import secrets
+from apps.api.errors import APIErrorExtender
+
+from apps.api.exceptions import APICustomException
+
 
 class CredentialsView(APIView):
     permission_classes = [AllowAny]
@@ -19,10 +23,7 @@ class CredentialsView(APIView):
         user = authenticate(username=username, password=password)
 
         if not user:
-            return Response(
-                {'error': ''},
-                status=status.HTTP_401_UNAUTHORIZED
-            )
+            raise APICustomException("utente non trovato", APIErrorExtender.missing_username)
 
         try:
             app = Application.objects.get(name='default')
