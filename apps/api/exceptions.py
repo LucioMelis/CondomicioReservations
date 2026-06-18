@@ -44,47 +44,17 @@ def _get_response(exc, response=None):
 
 def custom_exception_handler(exc, context):
 
-    # Eccezioni rest_framework 
     response = exception_handler(exc, context)
 
-    # =========================
-    # ECCEZIONI CUSTOM
-    # =========================
     if isinstance(exc, APIBaseException):
+        print("-------------------------EXC CUSTOM--------------------------")
         return _get_response(exc)
 
-    # =========================
-    # ERRORI DRF
-    # =========================
     if response is not None:
-        print("-------------------------sono qui--------------------------")
+        print("-------------------------EXC DRF--------------------------")
         return _get_response(exc, response)
-        # return Response(
-        #     {
-        #         "message": "Internal DRF server error",
-        #         "api_error": exc.__class__.__name__,
-        #         "data": response.data,
-        #         "http_status_code": response.status_code,
-        #     },
-        #     status=response.status_code,
-        # )
 
-    # =========================
-    # ERRORI DJANGO / PYTHON GENERICI
-    # =========================
-
+    print("-------------------------EXC DJ--------------------------")
     return _get_response(exc)
-    #
-    #
-    # return Response(
-    #
-    # {
-    #         "message": str(exc) if settings.DEBUG else "Internal server error",
-    #         "api_error": exc.__class__.__name__,
-    #         "data": None,
-    #         "http_status_code": status.HTTP_500_INTERNAL_SERVER_ERROR,
-    #     },
-    #     status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-    # )
-# PRODUCTION best practice
+
 # str(exc) if settings.DEBUG else "Internal server error"
